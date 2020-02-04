@@ -1,6 +1,6 @@
 {
   "name": "dyna-email-sender",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The dyna-email-sender; Send emails pretty easy.",
   "repository": {
     "type": "git",
