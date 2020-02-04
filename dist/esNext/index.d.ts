@@ -1,1 +1,1 @@
-export { Person, IPerson, } from "./person/Person";
+export { DynaEmailSender, IDynaEmailSenderConfig, IEmail, } from "./DynaEmailSender";
