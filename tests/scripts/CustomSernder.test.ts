@@ -1,35 +1,23 @@
 import "jest";
-import * as nodemailer from "nodemailer";
 
 import {DynaEmailSender} from "../../src";
 import {IError} from "dyna-interfaces";
 
-describe('Send mails with EmailSender', () => {
-  let user: string, pass: string;
-
-  beforeAll(done => {
-    nodemailer.createTestAccount((err: Error | null, account) => {
-      if (err) fail({message: 'Error on beforeAll nodemailer.createTestAccount', error: err});
-      user = account.user;
-      pass = account.pass;
-      done();
-    });
-  });
-
+describe.skip('Send mails with EmailSender', () => {
   it('should send email', (done: Function) => {
     const sender: DynaEmailSender = new DynaEmailSender({
-      host: 'smtp.ethereal.email',
-      port: 587,
-      tls: false,
-      username: user,
-      password: pass,
+      host: 'main...',
+      port: 465,
+      tls: true,
+      username: 'user-name...',
+      password: 'password...',
       allowInvalidCertificates: false,
     });
 
     sender.send({
       fromTitle: 'Info My Company 👻',      // sender address
-      fromAddress: 'info@my-company.com',   // sender address
-      toAddress: 'lola@foo.co',             // list of receivers
+      fromAddress: 'info@example.com',      // sender address
+      toAddress: 'linda@example.com',       // list of receivers
       subject: 'Hello ✔',                   // Subject line
       text: 'Hello world?',                 // plain text body
       html: '<b>Hello world?</b>',          // html body
