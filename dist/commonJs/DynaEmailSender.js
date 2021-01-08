@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DynaEmailSender = void 0;
 var nodemailer = require("nodemailer");
 var DynaEmailSender = /** @class */ (function () {
     function DynaEmailSender(config) {
@@ -13,7 +14,7 @@ var DynaEmailSender = /** @class */ (function () {
                 pass: this.config.password,
             },
             tls: {
-                rejectUnauthorized: !!this.config.allowInvalidCertificates,
+                rejectUnauthorized: this.config.allowInvalidCertificates,
             },
         });
     }
@@ -41,7 +42,7 @@ var DynaEmailSender = /** @class */ (function () {
                             email: { from: "\"" + email.fromTitle + "\" <" + email.fromAddress + ">", to: toAddress, subject: email.subject },
                             senderLibInfo: info,
                         },
-                        error: error
+                        error: error,
                     });
                 }
                 else {

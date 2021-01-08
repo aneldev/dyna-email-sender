@@ -36,7 +36,7 @@ export class DynaEmailSender {
         pass: this.config.password,
       },
       tls: {
-        rejectUnauthorized: !!this.config.allowInvalidCertificates,
+        rejectUnauthorized: this.config.allowInvalidCertificates,
       },
     });
   }
@@ -64,7 +64,7 @@ export class DynaEmailSender {
                 email: {from: `"${email.fromTitle}" <${email.fromAddress}>`, to: toAddress, subject: email.subject},
                 senderLibInfo: info,
               },
-              error
+              error,
             });
           }
           else {

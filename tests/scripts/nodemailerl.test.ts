@@ -10,7 +10,8 @@ describe('Send mails with nodemailer', () => {
     // taken from: https://nodemailer.com/about/#example
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
-    nodemailer.createTestAccount((err, account) => {
+    nodemailer.createTestAccount((err: Error | null, account) => {
+      if (err) fail({message: 'Error on beforeAll nodemailer.createTestAccount', error: err});
 
       console.log('test account created', account);
 
@@ -21,20 +22,20 @@ describe('Send mails with nodemailer', () => {
         secure: false, // true for 465, false for other ports
         auth: {
           user: account.user, // generated ethereal user
-          pass: account.pass  // generated ethereal password
+          pass: account.pass, // generated ethereal password
         },
         tls: {
-          rejectUnauthorized: false // allow invalid certificates
+          rejectUnauthorized: false, // allow invalid certificates
         },
       });
 
       // setup email data with unicode symbols
       let mailOptions = {
         from: '"Fred Foo 👻" <foo@blurdybloop.com>', // sender address
-        to: 'user@foo.co', // list of receivers
-        subject: 'Hello ✔', // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
+        to: 'user@foo.co',            // list of receivers
+        subject: 'Hello ✔',           // Subject line
+        text: 'Hello world?',         // plain text body
+        html: '<b>Hello world?</b>',  // html body
       };
 
       // send mail with defined transport object
